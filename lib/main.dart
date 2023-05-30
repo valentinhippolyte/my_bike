@@ -33,27 +33,61 @@ class MyHomePage extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          'Main Page (list) ',
+          'Main Page (list)' ,
           style: TextStyle(fontSize: 24),
         ),
       ),
-      bottomNavigationBar: const BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              icon: Icon(Icons.list),
-              onPressed: null,
+              icon: const Icon(Icons.list),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EmptyPage()),
+                );
+              },
             ),
             IconButton(
-              icon: Icon(Icons.favorite),
-              onPressed: null,
+              icon: const Icon(Icons.favorite),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EmptyPage()),
+                );
+              },
             ),
             IconButton(
-              icon: Icon(Icons.search),
-              onPressed: null,
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EmptyPage()),
+                );
+              },
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class EmptyPage extends StatelessWidget {
+  const EmptyPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Empty Page'),
+      ),
+      body: const Center(
+        child: Text(
+          'This is an empty page.',
+          style: TextStyle(fontSize: 24),
         ),
       ),
     );
