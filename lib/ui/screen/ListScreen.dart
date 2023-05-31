@@ -34,20 +34,8 @@ class ListScreen extends StatelessWidget {
                         address: station!.nom! + ' ' + station!.commune!,
                         distance: 0,
                         type: station!.type!,
-                    );
-                      
-                      Card(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          ListTile(
-                            leading: Icon(Icons.location_on),
-                            title: Text(station!.nom!),
-                            subtitle: Text(station!.commune!),
-                            iconColor: MBColors.bleu,
-                          ),
-                        ],
-                      ),
+                        nbplacesdispo: station!.nbplacesdispo!,
+                        nbvelodispo: station!.nbvelosdispo!,
                     );
                   }, itemCount: records.length);
                 } else {
