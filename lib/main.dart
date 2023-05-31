@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_bike/ui/screen/ListScreen.dart';
+
+
+import 'ui/screen/ListScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,83 +10,65 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-
-      home: ListScrren(),
-
+      home: ListScreen(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
+
+
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Stations',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Favorites',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Search',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('BottomNavigationBar Sample'),
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: const Center(
+        child: Text(
+          ' Les stations ',
+          style: TextStyle(fontSize: 24),
         ),
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.location_on),
-              label: 'Stations',
+      ),
+      bottomNavigationBar: const BottomAppBar(
+
+
+        color: Colors.blue,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+          children: [
+
+            IconButton(
+              icon: Icon(Icons.bike_scooter),
+              onPressed: null,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.star),
-              label: 'favorites',
+            IconButton(
+              icon: Icon(Icons.favorite),
+              onPressed: null,
             ),
-            BottomNavigationBarItem(
+            IconButton(
               icon: Icon(Icons.search),
-              label: 'search',
+              onPressed: null,
             ),
           ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber[800],
-          onTap: _onItemTapped,
         ),
-      );
-    }
+      ),
+    );
   }
+
+}
