@@ -3,7 +3,6 @@ import 'package:my_bike/ui/assets/Colors.dart';
 import 'package:my_bike/ui/screen/ListFavScreen.dart';
 import 'package:my_bike/ui/screen/SearchScreen.dart';
 
-
 import 'ui/screen/ListScreen.dart';
 
 void main() {
@@ -49,7 +48,6 @@ class _MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
               label: 'Recherche',
-
             ),
           ],
           backgroundColor: MBColors.gris,
@@ -59,9 +57,9 @@ class _MyAppState extends State<MyApp> {
           unselectedItemColor: MBColors.grisPerle,
         ),
       ),
-
     );
   }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;

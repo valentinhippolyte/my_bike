@@ -26,7 +26,10 @@ class StationCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(Icons.location_on, size: 28.0,),
+              Icon(
+                Icons.location_on,
+                size: 28.0,
+              ),
             ],
           ),
           title: Text(address),
@@ -72,23 +75,25 @@ class StationCard extends StatelessWidget {
                             ]),
                             Card(
                               child: ListTile(
-                                leading: const Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                dense: true,
+                                leading: Icon(Icons.info),
+                                title: Row(
                                   children: [
-                                    Icon(Icons.info, size: 28.0,),
+                                    Column(
+                                      children: [
+                                        const Text("Nombre de Places :"),
+                                        Text(nbplacesdispo.toString()),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      children: [
+                                        const Text("Nombre de Vélos :"),
+                                        Text(nbvelodispo.toString()),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                                title: Text(address),
-                                subtitle: type.contains('AVEC')
-                                    ? Image.asset(
-                                        'assets/images/logo-cb.jpg',
-                                        width: 15,
-                                        height: 15,
-                                        alignment: Alignment.bottomLeft,
-                                      ) //code if above statement is true
-                                    : Text(type),
-                                trailing: Text('${distance}m'),
                               ),
                             ),
                             Row(
