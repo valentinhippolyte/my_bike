@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/dataSource/remote/VlilleApi.dart';
 import '../../data/model/VlilleResponse.dart';
+import '../assets/Colors.dart';
 
 class ListScreen extends StatelessWidget {
 
@@ -13,10 +14,11 @@ class ListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("la liste "),
+        title: const Text("Search "),
+        backgroundColor: MBColors.gris,
       ),
-      body:
-      FutureBuilder(
+      backgroundColor: MBColors.grisPerle,
+      body: FutureBuilder(
           future: api.getVlille(),
           builder: (context, snapshot){
             if(snapshot.hasData){
@@ -24,22 +26,18 @@ class ListScreen extends StatelessWidget {
               if(response != null){
                 List<Records>? records = response.records;
                 if(records != null){
-                  // on a
                   return ListView.builder(itemBuilder: (context, index){
                     Records currentRecord = records[index];
                     Fields? station = currentRecord.fields;
                     return ListTile(
                       title: Text(station!.nom!),
                     );
-                  }, itemCount: records.length,
-                  );
+                  }, itemCount: records.length);
+                } else {
+                  return const Text("Aucune Station Trouvée");
                 }
-              }
-              String? adress = snapshot.data?.records?.first.fields?.adresse;
-              if(adress != null){
-                return Text(adress);
-              }else{
-                return const Text("pas de station ");
+              } else {
+                return const CircularProgressIndicator();
               }
             }else{
               return const CircularProgressIndicator();

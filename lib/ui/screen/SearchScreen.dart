@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../assets/Colors.dart';
+
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
@@ -8,7 +10,9 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Search "),
+        backgroundColor: MBColors.gris,
       ),
+      backgroundColor: MBColors.grisPerle,
     );
   }
 }
