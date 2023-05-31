@@ -36,29 +36,22 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: ListScreen(),
       ),
-      bottomNavigationBar: const BottomAppBar(
-
-
-        color: Colors.blue,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-          children: [
-
-            IconButton(
-              icon: Icon(Icons.bike_scooter),
-              onPressed: null,
-            ),
-            IconButton(
-              icon: Icon(Icons.favorite),
-              onPressed: null,
-            ),
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: null,
-            ),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bike_scooter),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Business',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+        ],
+        selectedItemColor: Colors.amber[800],
       ),
     );
   }
