@@ -20,29 +20,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ListScreen(),
+      home: MyHomePage(),
+
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-
-  final String title;
-
+  
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: const Center(
-        child: Text(
-          ' Les stations ',
-          style: TextStyle(fontSize: 24),
-        ),
+    return Scaffold(
+
+      body: Center(
+        child: ListScreen(),
       ),
       bottomNavigationBar: const BottomAppBar(
 
