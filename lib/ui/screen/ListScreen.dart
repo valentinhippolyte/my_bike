@@ -46,7 +46,21 @@ class ListScreen extends StatelessWidget {
                 return const CircularProgressIndicator();
               }
             } else {
-              return const CircularProgressIndicator();
+              return const Center(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Icon(
+                      Icons.directions_bike, // Icône de vélo prédéfinie
+                      size: 40, // Ajustez la taille de l'icône du vélo selon vos besoins
+                      color: Colors.black, // Couleur de l'icône du vélo
+                    ),
+                    Positioned.fill(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ],
+                ),
+              );
             }
           }),
     );
