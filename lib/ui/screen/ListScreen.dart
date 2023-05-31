@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_bike/ui/screen/elements/Card.dart';
 
 import '../../data/dataSource/remote/VlilleApi.dart';
 import '../../data/model/VlilleResponse.dart';
@@ -29,8 +30,24 @@ class ListScreen extends StatelessWidget {
                   return ListView.builder(itemBuilder: (context, index){
                     Records currentRecord = records[index];
                     Fields? station = currentRecord.fields;
-                    return ListTile(
-                      title: Text(station!.nom!),
+                    return StationCard(
+                        address: station!.nom! + ' ' + station!.commune!,
+                        distance: 0,
+                        type: station!.type!,
+                    );
+                      
+                      Card(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            leading: Icon(Icons.location_on),
+                            title: Text(station!.nom!),
+                            subtitle: Text(station!.commune!),
+                            iconColor: MBColors.bleu,
+                          ),
+                        ],
+                      ),
                     );
                   }, itemCount: records.length);
                 } else {
@@ -44,6 +61,43 @@ class ListScreen extends StatelessWidget {
             }
 
           }
+      ),
+    );
+  }
+}
+
+class CardExample extends StatelessWidget {
+  const CardExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const ListTile(
+              leading: Icon(Icons.album),
+              title: Text('The Enchanted Nightingale'),
+              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(
+                  child: const Text('BUY TICKETS'),
+                  onPressed: () {/* ... */},
+                ),
+                const SizedBox(width: 8),
+                TextButton(
+                  child: const Text('LISTEN'),
+                  onPressed: () {/* ... */},
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
