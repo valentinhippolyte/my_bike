@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ui/screen/ListScreen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ListScreen(),
     );
   }
 }
@@ -46,7 +48,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const EmptyPage()),
+                  MaterialPageRoute(builder: (context) => ListScreen()),
                 );
               },
             ),
