@@ -53,10 +53,12 @@ class ListScreen extends StatelessWidget {
                     Icon(
                       Icons.directions_bike, // Icône de vélo prédéfinie
                       size: 40, // Ajustez la taille de l'icône du vélo selon vos besoins
-                      color: Colors.black, // Couleur de l'icône du vélo
+                      color: Colors.grey, // Couleur de l'icône du vélo
                     ),
                     Positioned.fill(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: Colors.grey,
+                      ),
                     ),
                   ],
                 ),
