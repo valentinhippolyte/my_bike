@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:my_bike/ui/screen/elements/Card.dart';
 
 import '../../data/dataSource/remote/VlilleApi.dart';
@@ -7,25 +6,16 @@ import '../../data/model/VlilleResponse.dart';
 import '../assets/Colors.dart';
 
 import 'dart:math';
-=======
-import 'package:my_bike/data/model/VLilleApiResponse.dart';
-import 'package:my_bike/data/dataSource/remote/VLilleApi.dart';
->>>>>>> c5b8f8c01a1f6bd748aeec1a7d832554200b3e36
 
 class ListScreen extends StatelessWidget {
   ListScreen({Key? key}) : super(key: key);
 
-<<<<<<< HEAD
   VlilleApi api = VlilleApi();
-=======
-  VLilleApi api = VLilleApi();
->>>>>>> c5b8f8c01a1f6bd748aeec1a7d832554200b3e36
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-<<<<<<< HEAD
         title: const Text("Stations "),
         backgroundColor: MBColors.gris,
       ),
@@ -103,39 +93,4 @@ class ListScreen extends StatelessWidget {
     return degrees * pi / 180;
   }
 
-=======
-        title: const Text("Liste des adresses"),
-      ),
-      body: FutureBuilder<VLilleApiResponse>(
-        future: api.getVLille(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasData) {
-            final records = snapshot.data?.records;
-            if (records != null && records.isNotEmpty) {
-              return ListView.builder(
-                itemCount: records.length,
-                itemBuilder: (context, index) {
-                  final station = records[index].fields;
-                  return ListTile(
-                    title: Text(station?.nom ?? "Nom inconnu"),
-                    subtitle: Text(station?.adresse ?? "Adresse inconnue"),
-                    leading: Icon(Icons.location_on),
-                  );
-                },
-              );
-            } else {
-              return const Center(child: Text("Aucune adresse trouvée"));
-            }
-          } else if (snapshot.hasError) {
-            return Center(child: Text("Erreur: ${snapshot.error}"));
-          } else {
-            return const Center(child: Text("Aucune donnée disponible"));
-          }
-        },
-      ),
-    );
-  }
->>>>>>> c5b8f8c01a1f6bd748aeec1a7d832554200b3e36
 }

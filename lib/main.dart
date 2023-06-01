@@ -5,13 +5,10 @@ import 'package:my_bike/ui/screen/SearchScreen.dart';
 
 import 'ui/screen/ListScreen.dart';
 
-import 'ui/screen/ListScreen.dart';
-
 void main() {
   runApp(const MyApp());
 }
 
-<<<<<<< HEAD
 int _selectedIndex = 0;
 
 class MyApp extends StatefulWidget {
@@ -23,17 +20,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-=======
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
->>>>>>> c5b8f8c01a1f6bd748aeec1a7d832554200b3e36
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-<<<<<<< HEAD
       home: Scaffold(
         body: Center(
           child: IndexedStack(
@@ -66,85 +57,6 @@ class MyApp extends StatelessWidget {
           onTap: _onItemTapped,
           selectedItemColor: MBColors.bleu,
           unselectedItemColor: MBColors.grisPerle,
-=======
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      //home: ListScreen(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: const Center(
-        child: Text(
-          'Main Page (list)' ,
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.list),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ListScreen()),
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.favorite),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const EmptyPage()),
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const EmptyPage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class EmptyPage extends StatelessWidget {
-  const EmptyPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Empty Page'),
-      ),
-      body: const Center(
-        child: Text(
-          'This is an empty page.',
-          style: TextStyle(fontSize: 24),
->>>>>>> c5b8f8c01a1f6bd748aeec1a7d832554200b3e36
         ),
       ),
     );
