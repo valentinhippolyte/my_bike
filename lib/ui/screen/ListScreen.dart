@@ -28,6 +28,18 @@ class ListScreen extends StatelessWidget {
               if (response != null) {
                 List<Records>? records = response.records;
                 if (records != null) {
+                  // Trier les records par ordre croissant de distance
+                  records.sort((a, b) {
+                    double? longitudeA = a.fields?.localisation?[0];
+                    double? latitudeA = a.fields?.localisation?[1];
+                    double? longitudeB = b.fields?.localisation?[0];
+                    double? latitudeB = b.fields?.localisation?[1];
+
+                    int distanceA = calculateDistance(50.63899667255768, 3.0606579737783246, longitudeA!, latitudeA!);
+                    int distanceB = calculateDistance(50.63899667255768, 3.0606579737783246, longitudeB!, latitudeB!);
+
+                    return distanceA.compareTo(distanceB);
+                  });
                   return ListView.builder(
                       itemBuilder: (context, index) {
                         Records currentRecord = records[index];

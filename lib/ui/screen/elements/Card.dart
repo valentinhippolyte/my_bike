@@ -19,6 +19,7 @@ class StationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isFavorite = false;
     return Center(
       child: Card(
         child: ListTile(
@@ -104,9 +105,11 @@ class StationCard extends StatelessWidget {
                                   child: ElevatedButton.icon(
                                     onPressed: () {
                                       Navigator.pop(context);
+                                      isFavorite = !isFavorite;
                                     },
-                                    icon: const Icon(Icons.favorite_outline,
-                                        size: 18),
+                                    icon: isFavorite
+                                        ? const Icon(Icons.favorite, size: 18) // Icône remplie si favori
+                                        : const Icon(Icons.favorite_outline, size: 18), // Icône vide sinon
                                     label: const Text("Ajouter aux favoris"),
                                   ),
                                 ),
