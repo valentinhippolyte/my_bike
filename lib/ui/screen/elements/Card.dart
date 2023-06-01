@@ -19,9 +19,9 @@ class StationCard extends StatelessWidget {
     required this.type, required this.coordonnees,
   }) : super(key: key);
 
-  Future<void> launchGoogleMaps(String coordonnees) async {
+  Future<void> launchGoogleMaps(String address) async {
     final googleMapsUrl =
-        'https://www.google.com/maps/search/?api=1&query=$coordonnees';
+        'https://www.google.com/maps/search/?api=1&query=$address';
     await launch(googleMapsUrl);
   }
 
@@ -128,7 +128,7 @@ class StationCard extends StatelessWidget {
                                 child: ElevatedButton.icon(
                                   onPressed: () {
                                     Navigator.pop(context);
-                                    launchGoogleMaps(coordonnees);
+                                    launchGoogleMaps(address);
                                   },
                                   icon: const Icon(
                                     Icons.location_on,
