@@ -8,7 +8,6 @@ class StationCard extends StatelessWidget {
   final String type;
   final int nbvelodispo;
   final int nbplacesdispo;
-  final String coordonnees;
 
   const StationCard({
     Key? key,
@@ -16,7 +15,7 @@ class StationCard extends StatelessWidget {
     required this.nbvelodispo,
     required this.address,
     required this.distance,
-    required this.type, required this.coordonnees,
+    required this.type,
   }) : super(key: key);
 
   Future<void> launchGoogleMaps(String address) async {
