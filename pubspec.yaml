@@ -36,11 +36,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^1.0.0
 <<<<<<< HEAD
+<<<<<<< HEAD
   firebase_core: ^2.13.1
   url_launcher: ^6.0.10
 =======
   dio: ^5.1.2
 >>>>>>> c5b8f8c01a1f6bd748aeec1a7d832554200b3e36
+=======
+  firebase_core: ^2.13.1
+>>>>>>> d0d9ce20a90137ce6f85275a319740c73e17cb52
 
 dev_dependencies:
   flutter_test:

@@ -1,13 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_bike/ui/assets/Colors.dart';
 import 'package:my_bike/ui/screen/ListFavScreen.dart';
 import 'package:my_bike/ui/screen/SearchScreen.dart';
 
+import 'firebase_options.dart';
 import 'ui/screen/ListScreen.dart';
 
+<<<<<<< HEAD
 import 'ui/screen/ListScreen.dart';
 
 void main() {
+=======
+Future<void> main() async {
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+>>>>>>> d0d9ce20a90137ce6f85275a319740c73e17cb52
   runApp(const MyApp());
 }
 
@@ -44,7 +53,6 @@ class MyApp extends StatelessWidget {
               const SearchScreen(),
             ],
           ),
-          //_pages.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[

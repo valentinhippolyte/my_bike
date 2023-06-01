@@ -1,13 +1,23 @@
 {
   "project_info": {
+<<<<<<< HEAD
     "project_number": "603463850939",
     "project_id": "mobil-bb580",
     "storage_bucket": "mobil-bb580.appspot.com"
+=======
+    "project_number": "705396185578",
+    "project_id": "mybike-192d6",
+    "storage_bucket": "mybike-192d6.appspot.com"
+>>>>>>> d0d9ce20a90137ce6f85275a319740c73e17cb52
   },
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
         "mobilesdk_app_id": "1:603463850939:android:7e2fc0e28ecdc4d523c29e",
+=======
+        "mobilesdk_app_id": "1:705396185578:android:3cd17cafd34327a3a43a93",
+>>>>>>> d0d9ce20a90137ce6f85275a319740c73e17cb52
         "android_client_info": {
           "package_name": "com.valentin.bike.my_bike"
         }
@@ -15,7 +25,11 @@
       "oauth_client": [],
       "api_key": [
         {
+<<<<<<< HEAD
           "current_key": "AIzaSyDCyL9ebsOGG5ZvwcRCENFArB4sMLehRmw"
+=======
+          "current_key": "AIzaSyD5cHkb21Tt0QXmLLjOwE9shpqCH6cxG-M"
+>>>>>>> d0d9ce20a90137ce6f85275a319740c73e17cb52
         }
       ],
       "services": {
