@@ -50,7 +50,6 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-<<<<<<< HEAD
     apiKey: 'AIzaSyDCyL9ebsOGG5ZvwcRCENFArB4sMLehRmw',
     appId: '1:603463850939:android:7e2fc0e28ecdc4d523c29e',
     messagingSenderId: '603463850939',
@@ -64,21 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '603463850939',
     projectId: 'mobil-bb580',
     storageBucket: 'mobil-bb580.appspot.com',
-=======
-    apiKey: 'AIzaSyD5cHkb21Tt0QXmLLjOwE9shpqCH6cxG-M',
-    appId: '1:705396185578:android:3cd17cafd34327a3a43a93',
-    messagingSenderId: '705396185578',
-    projectId: 'mybike-192d6',
-    storageBucket: 'mybike-192d6.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCVM0eu06UE1GA4KnbXtxQy6qnCfE-b0aI',
-    appId: '1:705396185578:ios:02eb5406ecd9f0d4a43a93',
-    messagingSenderId: '705396185578',
-    projectId: 'mybike-192d6',
-    storageBucket: 'mybike-192d6.appspot.com',
->>>>>>> d0d9ce20a90137ce6f85275a319740c73e17cb52
     iosBundleId: 'com.valentin.bike.myBike',
   );
 }

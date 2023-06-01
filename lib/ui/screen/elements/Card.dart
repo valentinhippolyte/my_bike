@@ -46,7 +46,6 @@ class _StationCardState extends State<StationCard> {
 
   @override
   Widget build(BuildContext context) {
-    bool isFavorite = false;
     return Center(
       child: Card(
         child: ListTile(
@@ -140,7 +139,6 @@ class _StationCardState extends State<StationCard> {
                                   label: const Text("Ajouter aux favoris"),
                                 ),
                               ),
-<<<<<<< HEAD
                               const Spacer(),
                               Padding(
                                 padding:
@@ -152,23 +150,6 @@ class _StationCardState extends State<StationCard> {
                                   icon: const Icon(
                                     Icons.location_on,
                                     size: 18,
-=======
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(30, 10, 0, 0),
-                                  child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      isFavorite = !isFavorite;
-                                    },
-                                    icon: isFavorite
-                                        ? const Icon(Icons.favorite, size: 18) // Icône remplie si favori
-                                        : const Icon(Icons.favorite_outline, size: 18), // Icône vide sinon
-                                    label: const Text("Ajouter aux favoris"),
->>>>>>> d0d9ce20a90137ce6f85275a319740c73e17cb52
                                   ),
                                   label: isLaunching
                                       ? SizedBox(
