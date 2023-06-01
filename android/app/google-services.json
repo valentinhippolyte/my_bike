@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "705396185578",
+    "project_id": "mybike-192d6",
+    "storage_bucket": "mybike-192d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705396185578:android:3cd17cafd34327a3a43a93",
+        "android_client_info": {
+          "package_name": "com.valentin.bike.my_bike"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5cHkb21Tt0QXmLLjOwE9shpqCH6cxG-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
