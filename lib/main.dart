@@ -1,11 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_bike/ui/assets/Colors.dart';
 import 'package:my_bike/ui/screen/ListFavScreen.dart';
 import 'package:my_bike/ui/screen/SearchScreen.dart';
 
+import 'firebase_options.dart';
 import 'ui/screen/ListScreen.dart';
 
-void main() {
+Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
