@@ -1,21 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:my_bike/ui/assets/Colors.dart';
 
-class StationCard extends StatelessWidget {
+class StationCard extends StatefulWidget {
   final String address;
   final int distance;
   final String type;
   final int nbvelodispo;
   final int nbplacesdispo;
 
-  const StationCard(
-      {Key? key,
-      required this.nbplacesdispo,
-      required this.nbvelodispo,
-      required this.address,
-      required this.distance,
-      required this.type})
-      : super(key: key);
+  const StationCard({
+    Key? key,
+    required this.nbplacesdispo,
+    required this.nbvelodispo,
+    required this.address,
+    required this.distance,
+    required this.type,
+  }) : super(key: key);
+
+  @override
+  _StationCardState createState() => _StationCardState();
+}
+
+class _StationCardState extends State<StationCard> {
+  bool isLaunching = false;
+
+  Future<void> launchGoogleMaps(String address) async {
+    final googleMapsUrl =
+        'https://www.google.com/maps/search/?api=1&query=$address';
+    final uri = Uri.parse(googleMapsUrl);
+    // ignore: deprecated_member_use
+    if (await canLaunch(uri.toString())) {
+      setState(() {
+        isLaunching = true;
+      });
+      // ignore: deprecated_member_use
+      await launch(uri.toString());
+      setState(() {
+        isLaunching = false;
+      });
+    } else {
+      throw 'Could not launch Google Maps';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,105 +59,118 @@ class StationCard extends StatelessWidget {
               ),
             ],
           ),
-          title: Text(address),
-          subtitle: type.contains('AVEC')
+          title: Text(widget.address),
+          subtitle: widget.type.contains('AVEC')
               ? Image.asset(
-                  'assets/images/logo-cb.jpg',
-                  width: 15,
-                  height: 15,
-                  alignment: Alignment.bottomLeft,
-                ) //code if above statement is true
-              : Text(type),
-          trailing: Text('${distance}m'),
+            'assets/images/logo-cb.jpg',
+            width: 15,
+            height: 15,
+            alignment: Alignment.bottomLeft,
+          ) // code if above statement is true
+              : Text(widget.type),
+          trailing: Text('${widget.distance}m'),
           onTap: () {
             showModalBottomSheet(
-                context: context,
-                backgroundColor: MBColors.gris,
-                builder: (context) {
-                  return Wrap(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(children: [
+              context: context,
+              backgroundColor: MBColors.gris,
+              builder: (context) {
+                return Wrap(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              child: Text(
+                                widget.address,
+                                style: const TextStyle(color: MBColors.blanc),
+                              ),
+                            ),
+                            const Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(
+                                Icons.cancel,
+                                color: MBColors.blanc,
+                              ),
+                            ),
+                          ]),
+                          Card(
+                            child: ListTile(
+                              dense: true,
+                              leading: const Icon(Icons.info),
+                              title: Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      const Text("Nombre de Places :"),
+                                      Text(widget.nbplacesdispo.toString()),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  Column(
+                                    children: [
+                                      const Text("Nombre de Vélos :"),
+                                      Text(widget.nbvelodispo.toString()),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Row(
+                            children: [
                               Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                  child: Text(
-                                    address,
-                                    style:
-                                        const TextStyle(color: MBColors.blanc),
-                                  )),
-                              const Spacer(),
-                              IconButton(
+                                padding:
+                                const EdgeInsets.fromLTRB(30, 10, 0, 0),
+                                child: ElevatedButton.icon(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
                                   icon: const Icon(
-                                    Icons.cancel,
-                                    color: MBColors.blanc,
-                                  ))
-                            ]),
-                            Card(
-                              child: ListTile(
-                                dense: true,
-                                leading: Icon(Icons.info),
-                                title: Row(
-                                  children: [
-                                    Column(
-                                      children: [
-                                        const Text("Nombre de Places :"),
-                                        Text(nbplacesdispo.toString()),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    Column(
-                                      children: [
-                                        const Text("Nombre de Vélos :"),
-                                        Text(nbvelodispo.toString()),
-                                      ],
-                                    ),
-                                  ],
+                                    Icons.favorite_outline,
+                                    size: 18,
+                                  ),
+                                  label: const Text("Ajouter aux favoris"),
                                 ),
                               ),
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(30, 10, 0, 0),
-                                  child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: const Icon(Icons.favorite_outline,
-                                        size: 18),
-                                    label: const Text("Ajouter aux favoris"),
+                              const Spacer(),
+                              Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(0, 10, 30, 0),
+                                child: ElevatedButton.icon(
+                                  onPressed: () {
+                                    launchGoogleMaps(widget.address);
+                                  },
+                                  icon: const Icon(
+                                    Icons.location_on,
+                                    size: 18,
                                   ),
+                                  label: isLaunching
+                                      ? SizedBox(
+                                    width: 18,
+                                    height: 18,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                      : const Text("Itinéraire"),
                                 ),
-                                const Spacer(),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 10, 30, 0),
-                                  child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon:
-                                        const Icon(Icons.location_on, size: 18),
-                                    label: const Text("Itinéraire"),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
-                  );
-                });
+                    ),
+                  ],
+                );
+              },
+            );
           },
         ),
       ),
