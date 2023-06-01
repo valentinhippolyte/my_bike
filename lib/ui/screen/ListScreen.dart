@@ -53,6 +53,7 @@ class ListScreen extends StatelessWidget {
                           type: station!.type!,
                           nbplacesdispo: station!.nbplacesdispo!,
                           nbvelodispo: station!.nbvelosdispo!,
+                          coordonnees: station.localisation![0].toString() + ',' + station.localisation![1].toString(),
                         );
                       },
                       itemCount: records.length);
