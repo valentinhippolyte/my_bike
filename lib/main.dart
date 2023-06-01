@@ -18,12 +18,6 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-List<Widget> _pages = <Widget>[
-  ListScreen(),
-  const ListFavScreen(),
-  const SearchScreen(),
-];
-
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
@@ -33,7 +27,15 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       home: Scaffold(
         body: Center(
-          child: _pages.elementAt(_selectedIndex),
+          child: IndexedStack(
+            index: _selectedIndex,
+            children: [
+              ListScreen(),
+              const ListFavScreen(),
+              const SearchScreen(),
+            ],
+          ),
+          //_pages.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
