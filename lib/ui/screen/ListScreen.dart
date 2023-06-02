@@ -56,10 +56,11 @@ class ListScreen extends StatelessWidget {
 
                         return StationCard(
                           address: station!.nom! + ' ' + station!.commune!,
-                          distance: calculateDistance(50.63899667255768, 3.0606579737783246, longitude!, lattitude!), // localisation Efficom par défaut
+                          distance: calculateDistance(50.63177,3.06588, longitude!, lattitude!), // localisation Efficom par défaut
                           type: station!.type!,
                           nbplacesdispo: station!.nbplacesdispo!,
                           nbvelodispo: station!.nbvelosdispo!,
+                          localistion: longitude.toString()+','+lattitude.toString(),
                         );
                       },
                       itemCount: records.length);

@@ -14,8 +14,9 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   UserCredential credential = await FirebaseAuth.instance.signInAnonymously();
+  runApp(const MyApp());
+
 }
 
 int _selectedIndex = 0;

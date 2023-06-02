@@ -8,6 +8,7 @@ class StationCard extends StatelessWidget {
   final String type;
   final int nbvelodispo;
   final int nbplacesdispo;
+  final String localistion;
 
   const StationCard({
     Key? key,
@@ -15,12 +16,13 @@ class StationCard extends StatelessWidget {
     required this.nbvelodispo,
     required this.address,
     required this.distance,
+    required this.localistion,
     required this.type,
   }) : super(key: key);
 
-  Future<void> launchGoogleMaps(String address) async {
+  Future<void> launchGoogleMaps(String localistion) async {
     final googleMapsUrl =
-        'https://www.google.com/maps/search/?api=1&query=$address';
+        'https://maps.google.com/maps?saddr=50.63177,3.06588&daddr=$localistion';
     await launch(googleMapsUrl);
   }
 
@@ -127,7 +129,7 @@ class StationCard extends StatelessWidget {
                                 child: ElevatedButton.icon(
                                   onPressed: () {
                                     Navigator.pop(context);
-                                    launchGoogleMaps(address);
+                                    launchGoogleMaps(localistion);
                                   },
                                   icon: const Icon(
                                     Icons.location_on,
