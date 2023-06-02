@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_bike/ui/screen/elements/Card.dart';
 
@@ -12,8 +13,14 @@ class ListScreen extends StatelessWidget {
 
   VlilleApi api = VlilleApi();
 
+  final fieldsRef = FirebaseFirestore.instance.collection('FAVOIRS').withConverter<Fields>(
+    fromFirestore: (snapshots, _)=> Fields.fromJson(snapshots.data()!),
+    toFirestore: (fields, _)=> fields.toJson()
+  );
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Stations "),
