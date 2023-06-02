@@ -16,6 +16,7 @@ class SearchScreen extends StatefulWidget {
         backgroundColor: MBColors.gris,
       ),
       backgroundColor: MBColors.grisPerle,
+
     );
   }
 }
@@ -28,8 +29,6 @@ class _SearchBarState extends State<SearchScreen> {
     _textEditingController.dispose();
     super.dispose();
   }
-  VlilleApi api = VlilleApi();
-
   //List<Records> listToDisplay = [];
 
   @override

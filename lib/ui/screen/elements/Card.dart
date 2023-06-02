@@ -22,7 +22,7 @@ class StationCard extends StatelessWidget {
 
   Future<void> launchGoogleMaps(String localistion) async {
     final googleMapsUrl =
-        'https://maps.google.com/maps?saddr=50.63177,3.06588&daddr=$localistion';
+        'https://maps.google.com/maps?saddr=50.63101451960266, 3.0634013161982456&daddr=$localistion';
     await launch(googleMapsUrl);
   }
 
