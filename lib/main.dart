@@ -1,12 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_bike/ui/assets/Colors.dart';
 import 'package:my_bike/ui/screen/ListFavScreen.dart';
 import 'package:my_bike/ui/screen/SearchScreen.dart';
-
+import 'firebase_options.dart';
 import 'ui/screen/ListScreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  Future<void> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    UserCredential credential = await FirebaseAuth.instance.signInAnonymously();
+    runApp(const MyApp());
+  }
 }
 
 int _selectedIndex = 0;
