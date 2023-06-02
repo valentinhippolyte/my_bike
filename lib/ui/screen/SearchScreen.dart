@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../data/dataSource/remote/VlilleApi.dart';
 import '../assets/Colors.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -28,6 +28,9 @@ class _SearchBarState extends State<SearchScreen> {
     _textEditingController.dispose();
     super.dispose();
   }
+  VlilleApi api = VlilleApi();
+
+  //List<Records> listToDisplay = [];
 
   @override
   Widget build(BuildContext context) {
