@@ -51,16 +51,12 @@ class ListScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         Records currentRecord = records[index];
                         Fields? station = currentRecord.fields;
-                        double? longitude =
-                            currentRecord.fields?.localisation?[0];
-                        double? lattitude =
-                            currentRecord.fields?.localisation?[1];
+                        double? longitude = currentRecord.fields?.localisation?[0];
+                        double? lattitude = currentRecord.fields?.localisation?[1];
 
                         return StationCard(
                           address: station!.nom! + ' ' + station!.commune!,
-                          distance: calculateDistance(50.63899667255768,
-                              3.0606579737783246, longitude!, lattitude!),
-                          // localisation Efficom par défaut
+                          distance: calculateDistance(50.63899667255768, 3.0606579737783246, longitude!, lattitude!), // localisation Efficom par défaut
                           type: station!.type!,
                           nbplacesdispo: station!.nbplacesdispo!,
                           nbvelodispo: station!.nbvelosdispo!,
@@ -80,8 +76,7 @@ class ListScreen extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.directions_bike, // Icône de vélo prédéfinie
-                      size: 40,
-                      // Ajustez la taille de l'icône du vélo selon vos besoins
+                      size: 40, // Ajustez la taille de l'icône du vélo selon vos besoins
                       color: Colors.grey, // Couleur de l'icône du vélo
                     ),
                     Positioned.fill(
@@ -97,8 +92,8 @@ class ListScreen extends StatelessWidget {
     );
   }
 
-  int calculateDistance(double latitude1, double longitude1, double latitude2,
-      double longitude2) {
+  int calculateDistance(double latitude1, double longitude1, double latitude2, double longitude2) {
+
     double lat1Radians = degreesToRadians(latitude1);
     double lon1Radians = degreesToRadians(longitude1);
     double lat2Radians = degreesToRadians(latitude2);
@@ -107,15 +102,14 @@ class ListScreen extends StatelessWidget {
     double dLat = lat2Radians - lat1Radians;
     double dLon = lon2Radians - lon1Radians;
 
-    double a = sin(dLat / 2) * sin(dLat / 2) +
-        cos(lat1Radians) * cos(lat2Radians) * sin(dLon / 2) * sin(dLon / 2);
+    double a = sin(dLat / 2) * sin(dLat / 2) + cos(lat1Radians) * cos(lat2Radians) * sin(dLon / 2) * sin(dLon / 2);
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
     double distance = 6371 * c * 1000;
-    return distance.toInt();
+    return distance.toInt() ;
   }
-
   double degreesToRadians(double degrees) {
     return degrees * pi / 180;
   }
+
 }

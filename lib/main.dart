@@ -8,13 +8,14 @@ import 'package:my_bike/ui/screen/SearchScreen.dart';
 import 'firebase_options.dart';
 import 'ui/screen/ListScreen.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   UserCredential credential = await FirebaseAuth.instance.signInAnonymously();
-  runApp(const MyApp());
 }
 
 int _selectedIndex = 0;
@@ -43,6 +44,7 @@ class _MyAppState extends State<MyApp> {
               const SearchScreen(),
             ],
           ),
+          //_pages.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
