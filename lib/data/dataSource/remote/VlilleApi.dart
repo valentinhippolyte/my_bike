@@ -8,7 +8,7 @@ class VlilleApi {
   VlilleApiResponse? vlilleMemory;
 
   Future<VlilleApiResponse> getVlille() async {
-    if(VlilleApiResponse != null) {
+    if(vlilleMemory != null) {
       return Future.value(vlilleMemory);
     } else {
       Uri url = Uri.parse(
