@@ -9,7 +9,9 @@ import '../assets/Colors.dart';
 import 'dart:math';
 
 class ListScreen extends StatelessWidget {
-  ListScreen({Key? key}) : super(key: key);
+  final String searchValue;
+
+  ListScreen({required this.searchValue, Key? key}) : super(key: key);
 
   VlilleApi api = VlilleApi();
 
@@ -22,10 +24,10 @@ class ListScreen extends StatelessWidget {
 
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Stations "),
-        backgroundColor: MBColors.gris,
-      ),
+      //appBar: AppBar(
+        //title: const Text("Stations "),
+        //backgroundColor: MBColors.gris,
+      //),
       backgroundColor: MBColors.grisPerle,
       body: FutureBuilder(
           future: api.getVlille(),
@@ -34,11 +36,12 @@ class ListScreen extends StatelessWidget {
               VlilleApiResponse? response = snapshot.data;
               if (response != null) {
                 List<Records>? records = response.records;
-                String searchValue = "Lille";
-                records!.where((element) => element.fields!.commune!.contains(searchValue)).toList();
+                List<Records>? filteredRecords = records!.where((element) {
+                  return element.fields!.commune!.contains(searchValue);
+                }).toList();
                 if (records != null) {
                   // Trier les records par ordre croissant de distance
-                  records.sort((a, b) {
+                  filteredRecords.sort((a, b) {
                     double? longitudeA = a.fields?.localisation?[0];
                     double? latitudeA = a.fields?.localisation?[1];
                     double? longitudeB = b.fields?.localisation?[0];
@@ -51,7 +54,7 @@ class ListScreen extends StatelessWidget {
                   });
                   return ListView.builder(
                       itemBuilder: (context, index) {
-                        Records currentRecord = records[index];
+                        Records currentRecord = filteredRecords[index];
                         Fields? station = currentRecord.fields;
                         double? longitude = currentRecord.fields?.localisation?[0];
                         double? lattitude = currentRecord.fields?.localisation?[1];
@@ -65,7 +68,7 @@ class ListScreen extends StatelessWidget {
                           localistion: longitude.toString()+','+lattitude.toString(),
                         );
                       },
-                      itemCount: records.length);
+                      itemCount: filteredRecords.length);
                 } else {
                   return const Text("Aucune Station Trouvée");
                 }

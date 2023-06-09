@@ -1,53 +1,61 @@
 import 'package:flutter/material.dart';
 import '../../data/dataSource/remote/VlilleApi.dart';
+import '../screen/ListScreen.dart';
 import '../assets/Colors.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  @override
+  SearchScreenState createState() => SearchScreenState();
+}
+
+class SearchScreenState extends State<SearchScreen> {
+  TextEditingController _textEditingController = TextEditingController();
+  String searchValue = '';
 
   @override
-  _SearchBarState createState() => _SearchBarState();
+  void initState() {
+    super.initState();
+    _textEditingController.addListener(updateSearchValue);
+  }
+
+  void updateSearchValue() {
+    setState(() {
+      searchValue = _textEditingController.text;
+    });
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.removeListener(updateSearchValue);
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Search "),
-        backgroundColor: MBColors.gris,
+      body: Column(
+        children: [
+          TextField(
+            controller: _textEditingController,
+            decoration: InputDecoration(
+              hintText: 'Rechercher...',
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListScreen(searchValue: searchValue),
+          ),
+        ],
       ),
-      backgroundColor: MBColors.grisPerle,
-
     );
   }
 }
 
-class _SearchBarState extends State<SearchScreen> {
-   TextEditingController _textEditingController = TextEditingController();
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-  //List<Records> listToDisplay = [];
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: _textEditingController,
-      decoration: InputDecoration(
-        hintText: 'Rechercher...',
-        prefixIcon: Icon(Icons.search),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        ),
-      ),
-      onChanged: (value) {
-
-      },
-    );
-  }
-}
 
 
 // _list.where((fields)=>
