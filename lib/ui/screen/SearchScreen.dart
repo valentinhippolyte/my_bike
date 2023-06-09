@@ -11,6 +11,7 @@ class SearchScreen extends StatefulWidget {
 class SearchScreenState extends State<SearchScreen> {
   TextEditingController _textEditingController = TextEditingController();
   String searchValue = '';
+  bool isSearching = false;
 
   @override
   void initState() {
@@ -21,6 +22,7 @@ class SearchScreenState extends State<SearchScreen> {
   void updateSearchValue() {
     setState(() {
       searchValue = _textEditingController.text;
+      isSearching = searchValue.isNotEmpty;
     });
   }
 
@@ -46,9 +48,10 @@ class SearchScreenState extends State<SearchScreen> {
               ),
             ),
           ),
-          Expanded(
-            child: ListScreen(searchValue: searchValue),
-          ),
+          if (isSearching)
+            Expanded(
+              child: ListScreen(searchValue: searchValue),
+            ),
         ],
       ),
     );
