@@ -10,9 +10,9 @@ import 'dart:math';
 
 class ListScreen extends StatelessWidget {
   final String searchValue;
+  final bool showAppBar;
 
-  ListScreen({required this.searchValue, Key? key}) : super(key: key);
-
+  ListScreen({required this.searchValue, this.showAppBar = true, Key? key}) : super(key: key);
   VlilleApi api = VlilleApi();
 
   final fieldsRef = FirebaseFirestore.instance.collection('FAVOIRS').withConverter<Fields>(
@@ -24,10 +24,10 @@ class ListScreen extends StatelessWidget {
 
 
     return Scaffold(
-      //appBar: AppBar(
-        //title: const Text("Stations "),
-        //backgroundColor: MBColors.gris,
-      //),
+      appBar: showAppBar ? AppBar(
+        title: const Text("Stations"),
+        backgroundColor: MBColors.gris,
+      ) : null,
       backgroundColor: MBColors.grisPerle,
       body: FutureBuilder(
           future: api.getVlille(),
@@ -37,7 +37,9 @@ class ListScreen extends StatelessWidget {
               if (response != null) {
                 List<Records>? records = response.records;
                 List<Records>? filteredRecords = records!.where((element) {
-                  return element.fields!.commune!.contains(searchValue);
+                  final commune = element.fields!.commune!.toLowerCase();
+                  final search = searchValue.toLowerCase();
+                  return commune.contains(search);
                 }).toList();
                 if (records != null) {
                   // Trier les records par ordre croissant de distance

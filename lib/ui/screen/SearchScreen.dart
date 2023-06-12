@@ -38,6 +38,10 @@ class SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       body: Column(
         children: [
+          AppBar(
+            title: const Text("Stations"),
+            backgroundColor: MBColors.gris,
+          ),
           TextField(
             controller: _textEditingController,
             decoration: InputDecoration(
@@ -50,7 +54,7 @@ class SearchScreenState extends State<SearchScreen> {
           ),
           if (isSearching)
             Expanded(
-              child: ListScreen(searchValue: searchValue),
+              child: ListScreen(searchValue: searchValue, showAppBar: false),
             ),
         ],
       ),
