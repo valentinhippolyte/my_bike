@@ -25,9 +25,9 @@ class _HomePage extends State<HomePage> {
           child: IndexedStack(
             index: _selectedIndex,
             children: [
-              ListScreen(),
+              ListScreen(searchValue: '',),
               const ListFavScreen(),
-              const SearchScreen(),
+              SearchScreen(),
             ],
           ),
           //_pages.elementAt(_selectedIndex),

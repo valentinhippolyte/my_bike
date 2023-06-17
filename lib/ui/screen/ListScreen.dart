@@ -9,8 +9,10 @@ import '../assets/Colors.dart';
 import 'dart:math';
 
 class ListScreen extends StatelessWidget {
-  ListScreen({Key? key}) : super(key: key);
+  final String searchValue;
+  final bool showAppBar;
 
+  ListScreen({required this.searchValue, this.showAppBar = true, Key? key}) : super(key: key);
   VlilleApi api = VlilleApi();
 
   final fieldsRef = FirebaseFirestore.instance.collection('FAVOIRS').withConverter<Fields>(
@@ -22,10 +24,10 @@ class ListScreen extends StatelessWidget {
 
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Stations "),
+      appBar: showAppBar ? AppBar(
+        title: const Text("Stations"),
         backgroundColor: MBColors.gris,
-      ),
+      ) : null,
       backgroundColor: MBColors.grisPerle,
       body: FutureBuilder(
           future: api.getVlille(),
@@ -34,11 +36,14 @@ class ListScreen extends StatelessWidget {
               VlilleApiResponse? response = snapshot.data;
               if (response != null) {
                 List<Records>? records = response.records;
-                String searchValue = "Lille";
-                records!.where((element) => element.fields!.commune!.contains(searchValue)).toList();
+                List<Records>? filteredRecords = records!.where((element) {
+                  final commune = element.fields!.commune!.toLowerCase();
+                  final search = searchValue.toLowerCase();
+                  return commune.contains(search);
+                }).toList();
                 if (records != null) {
                   // Trier les records par ordre croissant de distance
-                  records.sort((a, b) {
+                  filteredRecords.sort((a, b) {
                     double? longitudeA = a.fields?.localisation?[0];
                     double? latitudeA = a.fields?.localisation?[1];
                     double? longitudeB = b.fields?.localisation?[0];
@@ -51,7 +56,7 @@ class ListScreen extends StatelessWidget {
                   });
                   return ListView.builder(
                       itemBuilder: (context, index) {
-                        Records currentRecord = records[index];
+                        Records currentRecord = filteredRecords[index];
                         Fields? station = currentRecord.fields;
                         double? longitude = currentRecord.fields?.localisation?[0];
                         double? lattitude = currentRecord.fields?.localisation?[1];
@@ -65,7 +70,7 @@ class ListScreen extends StatelessWidget {
                           localistion: longitude.toString()+','+lattitude.toString(),
                         );
                       },
-                      itemCount: records.length);
+                      itemCount: filteredRecords.length);
                 } else {
                   return const Text("Aucune Station Trouvée");
                 }
