@@ -34,6 +34,8 @@ class ListScreen extends StatelessWidget {
               VlilleApiResponse? response = snapshot.data;
               if (response != null) {
                 List<Records>? records = response.records;
+                String searchValue = "Lille";
+                records!.where((element) => element.fields!.commune!.contains(searchValue)).toList();
                 if (records != null) {
                   // Trier les records par ordre croissant de distance
                   records.sort((a, b) {
