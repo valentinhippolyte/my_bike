@@ -99,16 +99,6 @@ class _StationCardState extends State<StationCard> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    isStationFavorite().then((value) {
-      setState(() {
-        isFavorite = value;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Center(
       child: Card(
@@ -198,11 +188,7 @@ class _StationCardState extends State<StationCard> {
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(30, 10, 0, 0),
                                       child: ElevatedButton.icon(
-                                        onPressed: () {
-                                          setState (() {
-                                            isFavorite = !isFavorite;
-                                          });
-                                        },
+                                        onPressed: toggleFavorite,
                                         icon: isFavorite
                                             ? const Icon(Icons.favorite, size: 18) // Filled icon if favorite
                                             : const Icon(Icons.favorite_outline, size: 18), // Empty icon otherwise
