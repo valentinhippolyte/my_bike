@@ -4,33 +4,29 @@ import 'package:my_bike/ui/screen/ListFavScreen.dart';
 import 'package:my_bike/ui/screen/SearchScreen.dart';
 import 'ListScreen.dart';
 
-int _selectedIndex = 0;
-
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePage();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePage extends State<HomePage> {
-  // This widget is the root of your application.
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: Scaffold(
-        body: Center(
-          child: IndexedStack(
-            index: _selectedIndex,
-            children: [
-              ListScreen(searchValue: '',),
-              ListFavScreen(),
-              SearchScreen(),
-            ],
-          ),
-          //_pages.elementAt(_selectedIndex),
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            ListScreen(searchValue: ''),
+            ListFavScreen(),
+            SearchScreen(),
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
@@ -62,5 +58,4 @@ class _HomePage extends State<HomePage> {
       _selectedIndex = index;
     });
   }
-
 }

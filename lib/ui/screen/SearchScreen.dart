@@ -45,7 +45,7 @@ class SearchScreenState extends State<SearchScreen> {
           TextField(
             controller: _textEditingController,
             decoration: InputDecoration(
-              hintText: 'Rechercher...',
+              hintText: 'Rechercher par ville...',
               prefixIcon: Icon(Icons.search),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
