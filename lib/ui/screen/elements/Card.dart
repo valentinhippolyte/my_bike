@@ -34,47 +34,6 @@ class _StationCardState extends State<StationCard> {
     final googleMapsUrl = 'https://maps.google.com/maps?saddr=50.63101451960266, 3.0634013161982456&daddr=$localistion';
     await launch(googleMapsUrl);
   }
-
-  Future<void> toggleFavorite() async {
-    final user = _auth.currentUser;
-    final userId = user?.uid;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-    isFavorite = !isFavorite;
-
-    if (userId != null) {
-      if (isFavorite) {
-        // Ajouter le favori dans Firestore
-        await _firestore.collection('favorites').add({
-          'userId': userId,
-          'address': widget.address,
-          'distance': widget.distance,
-          'type': widget.type,
-          'nbvelodispo': widget.nbvelodispo,
-          'nbplacesdispo': widget.nbplacesdispo,
-          'localistion': widget.localistion,
-        });
-      } else {
-        // Supprimer le favori de Firestore
-        final favoritesSnapshot = await _firestore
-            .collection('favorites')
-            .where('userId', isEqualTo: userId)
-            .where('address', isEqualTo: widget.address)
-            .where('distance', isEqualTo: widget.distance)
-            .where('type', isEqualTo: widget.type)
-            .where('nbvelodispo', isEqualTo: widget.nbvelodispo)
-            .where('nbplacesdispo', isEqualTo: widget.nbplacesdispo)
-            .where('localistion', isEqualTo: widget.localistion)
-            .get();
-
-        if (favoritesSnapshot.docs.isNotEmpty) {
-          final favoriteId = favoritesSnapshot.docs[0].id;
-          await _firestore.collection('favorites').doc(favoriteId).delete();
-        }
-      }
-    }
-  }
-
   Future<bool> isStationFavorite() async {
     final user = _auth.currentUser;
     final userId = user?.uid;
@@ -96,6 +55,16 @@ class _StationCardState extends State<StationCard> {
     }
 
     return false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    isStationFavorite().then((value) {
+      setState(() {
+        isFavorite = value;
+      });
+    });
   }
 
   @override
@@ -188,7 +157,46 @@ class _StationCardState extends State<StationCard> {
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(30, 10, 0, 0),
                                       child: ElevatedButton.icon(
-                                        onPressed: toggleFavorite,
+                                        onPressed: () async {
+                                          final user = _auth.currentUser;
+                                          final userId = user?.uid;
+                                          final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+                                          setState (() {
+                                            isFavorite = !isFavorite;
+                                          });
+
+                                          if (userId != null) {
+                                            if (isFavorite) {
+                                              // Ajouter le favori dans Firestore
+                                              await _firestore.collection('favorites').add({
+                                                'userId': userId,
+                                                'address': widget.address,
+                                                'distance': widget.distance,
+                                                'type': widget.type,
+                                                'nbvelodispo': widget.nbvelodispo,
+                                                'nbplacesdispo': widget.nbplacesdispo,
+                                                'localistion': widget.localistion,
+                                              });
+                                            } else {
+                                              // Supprimer le favori de Firestore
+                                              final favoritesSnapshot = await _firestore
+                                                  .collection('favorites')
+                                                  .where('userId', isEqualTo: userId)
+                                                  .where('address', isEqualTo: widget.address)
+                                                  .where('distance', isEqualTo: widget.distance)
+                                                  .where('type', isEqualTo: widget.type)
+                                                  .where('nbvelodispo', isEqualTo: widget.nbvelodispo)
+                                                  .where('nbplacesdispo', isEqualTo: widget.nbplacesdispo)
+                                                  .where('localistion', isEqualTo: widget.localistion)
+                                                  .get();
+
+                                              if (favoritesSnapshot.docs.isNotEmpty) {
+                                                final favoriteId = favoritesSnapshot.docs[0].id;
+                                                await _firestore.collection('favorites').doc(favoriteId).delete();
+                                              }
+                                            }
+                                          }
+                                        },
                                         icon: isFavorite
                                             ? const Icon(Icons.favorite, size: 18) // Filled icon if favorite
                                             : const Icon(Icons.favorite_outline, size: 18), // Empty icon otherwise
