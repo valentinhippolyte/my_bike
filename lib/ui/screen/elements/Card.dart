@@ -44,7 +44,6 @@ class _StationCardState extends State<StationCard> {
       isFavorite = !isFavorite;
     });
 
-    print(isFavorite);
     if (userId != null) {
       if (isFavorite) {
         // Ajouter le favori dans Firestore
@@ -157,7 +156,7 @@ class _StationCardState extends State<StationCard> {
                               ),
                             ),
                             const Spacer(),
-                            ElevatedButton.icon(
+                            IconButton(
                               onPressed: () {
                                 Navigator.pop(context);
 
@@ -165,7 +164,7 @@ class _StationCardState extends State<StationCard> {
                               icon: const Icon(
                                 Icons.cancel,
                                 color: MBColors.blanc,
-                              ), label: Text("null"),
+                              ),
                             ),
                           ]),
                           Card(
@@ -200,7 +199,7 @@ class _StationCardState extends State<StationCard> {
                                   icon: isFavorite
                                       ? const Icon(Icons.favorite, size: 18) // Filled icon if favorite
                                       : const Icon(Icons.favorite_outline, size: 18), // Empty icon otherwise
-                                  label: const Text("Ajouter aux favoris"),
+                                  label: isFavorite ? const Text("Supprimer des favoris") : const Text("Ajouter aux favoris"),
                                 ),
                               ),
                               const Spacer(),
