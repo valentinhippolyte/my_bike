@@ -40,9 +40,7 @@ class _StationCardState extends State<StationCard> {
     final userId = user?.uid;
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-    setState(() {
-      isFavorite = !isFavorite;
-    });
+    isFavorite = !isFavorite;
 
     if (userId != null) {
       if (isFavorite) {
@@ -138,91 +136,103 @@ class _StationCardState extends State<StationCard> {
           onTap: () {
             showModalBottomSheet(
               context: context,
-              backgroundColor: MBColors.gris,
               builder: (context) {
-                return Wrap(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                return BottomSheet(
+                  onClosing: () {},
+                  backgroundColor: MBColors.gris,
+                  builder: (BuildContext context) {
+                    bool b = false;
+                    return StatefulBuilder(
+                      builder: (BuildContext context, setState) => Wrap(
                         children: [
-                          Row(children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                              child: Text(
-                                widget.address,
-                                style: const TextStyle(color: MBColors.blanc),
-                              ),
-                            ),
-                            const Spacer(),
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-
-                              },
-                              icon: const Icon(
-                                Icons.cancel,
-                                color: MBColors.blanc,
-                              ),
-                            ),
-                          ]),
-                          Card(
-                            child: ListTile(
-                              dense: true,
-                              leading: const Icon(Icons.info),
-                              title: Row(
-                                children: [
-                                  Column(
-                                    children: [
-                                      const Text("Nombre de Places :"),
-                                      Text(widget.nbplacesdispo.toString()),
-                                    ],
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                    child: Text(
+                                      widget.address,
+                                      style: const TextStyle(color: MBColors.blanc),
+                                    ),
                                   ),
                                   const Spacer(),
-                                  Column(
-                                    children: [
-                                      const Text("Nombre de Vélos :"),
-                                      Text(widget.nbvelodispo.toString()),
-                                    ],
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+
+                                    },
+                                    icon: const Icon(
+                                      Icons.cancel,
+                                      color: MBColors.blanc,
+                                    ),
                                   ),
-                                ],
-                              ),
+                                ]),
+                                Card(
+                                  child: ListTile(
+                                    dense: true,
+                                    leading: const Icon(Icons.info),
+                                    title: Row(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            const Text("Nombre de Places :"),
+                                            Text(widget.nbplacesdispo.toString()),
+                                          ],
+                                        ),
+                                        const Spacer(),
+                                        Column(
+                                          children: [
+                                            const Text("Nombre de Vélos :"),
+                                            Text(widget.nbvelodispo.toString()),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(30, 10, 0, 0),
+                                      child: ElevatedButton.icon(
+                                        onPressed: () {
+                                          setState (() {
+                                            isFavorite = !isFavorite;
+                                          });
+                                        },
+                                        icon: isFavorite
+                                            ? const Icon(Icons.favorite, size: 18) // Filled icon if favorite
+                                            : const Icon(Icons.favorite_outline, size: 18), // Empty icon otherwise
+                                        label: isFavorite ? const Text("Supprimer des favoris") : const Text("Ajouter aux favoris"),
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(0, 10, 30, 0),
+                                      child: ElevatedButton.icon(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          launchGoogleMaps(widget.localistion);
+                                        },
+                                        icon: const Icon(
+                                          Icons.location_on,
+                                          size: 18,
+                                        ),
+                                        label: const Text("Itinéraire"),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(30, 10, 0, 0),
-                                child: ElevatedButton.icon(
-                                  onPressed: toggleFavorite,
-                                  icon: isFavorite
-                                      ? const Icon(Icons.favorite, size: 18) // Filled icon if favorite
-                                      : const Icon(Icons.favorite_outline, size: 18), // Empty icon otherwise
-                                  label: isFavorite ? const Text("Supprimer des favoris") : const Text("Ajouter aux favoris"),
-                                ),
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 10, 30, 0),
-                                child: ElevatedButton.icon(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    launchGoogleMaps(widget.localistion);
-                                  },
-                                  icon: const Icon(
-                                    Icons.location_on,
-                                    size: 18,
-                                  ),
-                                  label: const Text("Itinéraire"),
-                                ),
-                              ),
-                            ],
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                    );
+                  },
                 );
               },
             );
