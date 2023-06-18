@@ -15,7 +15,7 @@ class ListScreen extends StatelessWidget {
   ListScreen({required this.searchValue, this.showAppBar = true, Key? key}) : super(key: key);
   VlilleApi api = VlilleApi();
 
-  final fieldsRef = FirebaseFirestore.instance.collection('FAVOIRS').withConverter<Fields>(
+  final fieldsRef = FirebaseFirestore.instance.collection('favorites').withConverter<Fields>(
     fromFirestore: (snapshots, _)=> Fields.fromJson(snapshots.data()!),
     toFirestore: (fields, _)=> fields.toJson()
   );

@@ -26,7 +26,7 @@ class _HomePage extends State<HomePage> {
             index: _selectedIndex,
             children: [
               ListScreen(searchValue: '',),
-              const ListFavScreen(),
+              ListFavScreen(),
               SearchScreen(),
             ],
           ),
